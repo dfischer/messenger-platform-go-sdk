@@ -10,18 +10,18 @@ import (
 
 // Profile struct holds data associated with Facebook profile
 type Profile struct {
-	FirstName      string 	`json:"first_name"`
-	LastName       string 	`json:"last_name"`
-	ProfilePicture string 	`json:"profile_pic,omitempty"`
-	Locale         string 	`json:"locale,omitempty"`
-	Timezone       float64  `json:"timezone,omitempty"`
-	Gender         string 	`json:"gender,omitempty"`
+	FirstName      string  `json:"first_name"`
+	LastName       string  `json:"last_name"`
+	ProfilePicture string  `json:"profile_pic,omitempty"`
+	Locale         string  `json:"locale,omitempty"`
+	Timezone       float64 `json:"timezone,omitempty"`
+	Gender         string  `json:"gender,omitempty"`
 }
 
 // GetProfile fetches the recipient's profile from facebook platform
 // Non empty UserID has to be specified in order to receive the information
 func (m *Messenger) GetProfile(userID string) (*Profile, error) {
-	resp, err := m.doRequest("GET", fmt.Sprintf(GraphAPI+"/v2.6/%s?fields=first_name,last_name,profile_pic,locale,timezone,gender", userID), nil)
+	resp, err := m.doRequest("GET", fmt.Sprintf(GraphAPI+"/v2.6/%s?fields=id,name,profile_pic", userID), nil)
 	if err != nil {
 		return nil, err
 	}
